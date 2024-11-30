@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candy Crush - Start</title>
+    <style>
+        body {
+            background: url("background.jpg") no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 4em;
+            text-shadow: 3px 3px 3px #ff6b6b;
+            margin-bottom: 20px;
+        }
+
+        .play-button {
+            padding: 15px 50px;
+            font-size: 28px;
+            color: white;
+            background: linear-gradient(45deg, #ff6f61, #d74a49);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+            animation: bounceIn 1.5s ease-in-out;
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            background: linear-gradient(45deg, #ff8566, #ff6f61);
+        }
+
+        .loader-container {
+            display: none;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .loader {
+            width: 0;
+            height: 30px;
+            background: linear-gradient(45deg, #43cea2, #185a9d);
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            transition: width 1.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.95);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Welcome to Candy Crush</h1>
+    <button class="play-button" onclick="startGame()">Play</button>
+
+    <div class="loader-container">
+        <div class="loader" id="loader">0%</div>
+    </div>
+
+    <script>
+        function startGame() {
+            document.querySelector('.play-button').style.display = 'none';
+            document.querySelector('.loader-container').style.display = 'block';
+
+            let loader = document.getElementById('loader');
+            let width = 0;
+            let interval = setInterval(function() {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    setTimeout(function() {
+                        window.location.href = 'samplecandy.html'; 
+                    }, 500);
+                } else {
+                    width++;
+                    loader.style.width = width + '%';
+                    loader.textContent = width + '%';
+                }
+            }, 15);
+        }
+    </script>
+</body>
+</html>
